@@ -31,6 +31,7 @@ public class BlackjackHand {
 
     public int getHandValue() {
         int value = 0;
+        int aceCount = 0;
         for (int i = 0; i < currentCard; i += 1) {
             if (hand[i].getFace().equalsIgnoreCase("two")) {
                 value += 2;
@@ -57,17 +58,18 @@ public class BlackjackHand {
                 // If Ace is less than 21, it becomes an 11
             } else if ((hand[i].getFace().equalsIgnoreCase("ace") && value < LOSE)) {
                 value += 11;
-                if (value >= 21) {
-                    value -= 10;
-                    return value;
-                }
-                // If Ace is less more 21, it becomes a 1 (probably wont work because you
-                // already lost)
-            } else if ((hand[i].getFace().equalsIgnoreCase("ace") && value > LOSE)) {
-                value += 1;
+                aceCount += 1; // as aces are added count them
             }
-            return value;
         }
+
+        // now reduce the total if needed and you have aces
+        while (value > 21 && aceCount > 0) {
+            value -= 10; // changes the ace value from 11 to 1 by subtracting 10
+            aceCount -= 1; // reduces the number of aces with value 11
+        }
+        // If Ace is less more 21, it becomes a 1 (probably wont work because you
+        // already lost)
+        return value;
 
     }
 
