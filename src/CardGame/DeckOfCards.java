@@ -33,12 +33,7 @@ public class DeckOfCards {
             deck [ count ] = new Card(faces[count % 13], suits [count / 13]);
 
     } // end DeckOfCards constructor
-
-    /**
-     * Shuffle deck of Cards by randomly switching all cards in deck.
-     */
-    public void shuffle()
-    {
+in 
         for (int first = 0; first < deck.length; first++)
         {
             // select a random number between 0 and 51
@@ -46,6 +41,11 @@ public class DeckOfCards {
 
             // swap current Card with randomly selected Card
             Card temp = deck[ first ];
+
+            System.out.println("temp: " + temp);
+            System.out.println("first: " + first);
+            System.out.println("second: " + second);
+
             deck[ first ] = deck[ second ];
             deck[ second ] = temp;
         }
